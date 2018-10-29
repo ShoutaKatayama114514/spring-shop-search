@@ -4,7 +4,20 @@
 <body>
 <div th:replace="common/navbar.html::navbar"></div>
 <div class="container">
-    <a href="/about">こちら</a> をご覧ください。
+<div class="row">
+    <div class="col-md-12">
+        <form>
+            <div class="form-group">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="検索ワードを入力…" name="keyword">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit">検索</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 </div>
 </body>
 </html>
