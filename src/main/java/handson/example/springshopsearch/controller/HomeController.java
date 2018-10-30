@@ -36,6 +36,9 @@ public class HomeController {
     					else if(param.get().equals("nameordescription")) {
     						list = itemRepository.findByNameOrDescriptionContainsOrderByIdAsc(keyword.get() , keyword.get());
     					}
+    					else {
+    						list = null;
+    					}
     					
     				}
     				else {
