@@ -1,5 +1,6 @@
 package handson.example.springshopsearch.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,23 +27,26 @@ public class HomeController {
             @RequestParam(name = "param",required = false) Optional<String> param,
             	@RequestParam(name = "keyword", required = false) Optional<String> keyword) {
     				List<Item> list = itemRepository.findAll();
-    				if(keyword.isPresent()) {
-    					if(param.get().equals("name")) {
+    				if(keyword.isPresent() && keyword.isPresent()) {
+    					switch(param.get()) {
+    					case "name":
     						list = itemRepository.findByNameContainsOrderByIdAsc(keyword.get());
-    					}
-    					else if(param.get().equals("description")) {
+    						break;
+    						
+    					case "description":
     						list = itemRepository.findByDescriptionContainsOrderByIdAsc(keyword.get());
-    					}
-    					else if(param.get().equals("nameordescription")) {
+    						break;
+    						
+    					case "nameordescription" :
     						list = itemRepository.findByNameOrDescriptionContainsOrderByIdAsc(keyword.get() , keyword.get());
+    						break;
+    						
+    					default:
+    						list = itemRepository.findAll();	
     					}
-    					else {
-    						list = null;
-    					}
-    					
     				}
     				else {
-						list = itemRepository.findAll();
+						list = new ArrayList<>();
 					}
         			model.addAttribute("items", list);
         			return "index";
