@@ -25,7 +25,10 @@ public class HomeController {
     public String index(
             Model model,
             @RequestParam(name = "param",required = false) Optional<String> param,
-            	@RequestParam(name = "keyword", required = false) Optional<String> keyword) {
+            	@RequestParam(name = "keyword", required = false) Optional<String> keyword
+            ) {
+    				//Itemモデルのリストを作成している
+    				//listの中身はitemRepositoryの中からすべてを検索した結果
     				List<Item> list = itemRepository.findAll();
     				if(keyword.isPresent() && keyword.isPresent()) {
     					switch(param.get()) {
@@ -56,4 +59,10 @@ public class HomeController {
     public String getAbout() {
         return "about";
     }
+    
+    @GetMapping("/hello")
+    public String hello(@RequestParam("name") String name) {
+    	return "";
+    }
+    
 }
