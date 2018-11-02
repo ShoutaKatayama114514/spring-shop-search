@@ -18,28 +18,41 @@ import handson.example.springshopsearch.model.item.ItemRepository;
 
 public class ItemController {
 	@GetMapping
-    public String listItem(Model model) {
-        List<Item> list = itemRepository.findAll();
-        model.addAttribute("items", list);
-        return "list_item";
-    }
-	
-	@GetMapping("add")
-    public String getForm() {
-        return "item_form";
-    }
-	@Autowired
-    ItemRepository itemRepository;
+	public String listItem(Model model) {
+		List<Item> list = itemRepository.findAll();
+		model.addAttribute("items", list);
+		return "list_item";
+	}
 
-    @PostMapping("/add")
-    public String registerItem(Item item) {
-        itemRepository.save(item);
-        return "redirect:/items";
-    }
-    
-    @GetMapping("{id:[0-9]+}")
-    public String getDetail(Model model, @PathVariable("id") Long id) {
-        model.addAttribute("item", itemRepository.getOne(id));
-        return "detail";
-    }
+	@GetMapping("add")
+	public String getForm() {
+		return "item_form";
+	}
+
+	@Autowired
+	ItemRepository itemRepository;
+
+	@PostMapping("/add")
+	public String registerItem(Item item) {
+		itemRepository.save(item);
+		return "redirect:/items";
+	}
+
+	@GetMapping("{id:[0-9]+}")
+	public String getDetail(Model model, @PathVariable("id") Long id) {
+		model.addAttribute("item", itemRepository.getOne(id));
+		return "detail";
+	}
+
+	@GetMapping("edit/{id:[0-9]+}")
+	public String getEdit(Model model, @PathVariable("id") Long id) {
+		model.addAttribute("item", itemRepository.getOne(id));
+		return "item_edit";
+	}
+
+	@PostMapping("/edit/{id:[0-9]+}")
+	public String editItem(Item item) {
+		itemRepository.save(item);
+		return "redirect:/items";
+	}
 }

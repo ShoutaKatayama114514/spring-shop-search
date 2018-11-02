@@ -17,23 +17,23 @@ import lombok.NoArgsConstructor;
 @Data
 
 public class Item {
-		//主キー
-	    @Id
-	    //自動でキーを設定してくれる
-	    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	    //カラムを意味するもの
-	    @Column(name = "id")
-	    public Long id;
+	//主キー
+	@Id
+	//自動でキーを設定してくれる
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	//カラムを意味するもの
+	@Column(name = "id")
+	public Long id;
 
-	    @Column(name = "name")
-	    public String name;
-	    
-	    //@minで最小値0を定義
-	    @Min(value = 0)
-	    @Column(name = "price")
-	    public int price;
+	@Column(name = "name")
+	public String name;
 
-	    @Column(name = "description", columnDefinition = "TEXT")
-	    public String description;
-	
+	//@minで最小値0を定義
+	@Min(value = 0)
+	@Column(name = "price")
+	public int price;
+
+	@Column(name = "description", columnDefinition = "TEXT")
+	public String description;
+
 }
